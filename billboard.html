@@ -1,0 +1,208 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Billboard-Animation</title>
+<style>
+  :root {
+    --red: #da291c;
+    --gold: #ffc72c;
+    --ink: #1b1b1b;
+    --sky-top: #0b1d3a;
+    --sky-bot: #f08a4b;
+    --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+    --loop: 12s;
+  }
+  * { box-sizing: border-box; margin: 0; }
+  html, body { height: 100%; }
+  body {
+    background: linear-gradient(var(--sky-top), var(--sky-bot) 78%);
+    overflow: hidden;
+    font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  }
+  .scene { position: relative; width: 100%; height: 100%; }
+
+  /* Sterne */
+  .stars {
+    position: absolute; inset: 0 0 40% 0;
+    background-image:
+      radial-gradient(1.5px 1.5px at 12% 20%, #fff, transparent),
+      radial-gradient(1px 1px at 30% 55%, #fff, transparent),
+      radial-gradient(1.5px 1.5px at 55% 15%, #fff, transparent),
+      radial-gradient(1px 1px at 72% 40%, #fff, transparent),
+      radial-gradient(1.5px 1.5px at 88% 22%, #fff, transparent);
+    animation: twinkle 4s ease-in-out infinite alternate;
+  }
+  @keyframes twinkle { from { opacity: .4 } to { opacity: 1 } }
+
+  /* Straße */
+  .road {
+    position: absolute; left: 0; right: 0; bottom: 0; height: 18%;
+    background: #22232a;
+    border-top: 4px solid #3a3b44;
+  }
+  .road::before {
+    content: ""; position: absolute; left: 0; right: 0; top: 48%; height: 6px;
+    background: repeating-linear-gradient(90deg, var(--gold) 0 60px, transparent 60px 120px);
+    animation: lane 1.2s linear infinite;
+  }
+  @keyframes lane { to { background-position-x: -120px } }
+
+  /* Auto */
+  .car {
+    position: absolute; bottom: 9%; left: 0; width: 120px; height: 44px;
+    animation: drive 9s linear infinite;
+  }
+  .car::before { /* Karosserie */
+    content: ""; position: absolute; inset: 14px 0 6px 0; background: #e9e9ee; border-radius: 10px 14px 6px 6px;
+  }
+  .car::after { /* Dach */
+    content: ""; position: absolute; left: 26px; width: 58px; top: 0; height: 22px;
+    background: #cfd2da; border-radius: 14px 14px 0 0;
+  }
+  @keyframes drive { from { transform: translateX(-160px) } to { transform: translateX(calc(100vw + 40px)) } }
+
+  /* Billboard */
+  .board {
+    z-index: 1; position: absolute; left: 50%; top: 9%;
+    width: min(86vw, 900px); aspect-ratio: 16 / 7;
+    transform: translateX(-50%);
+    background: var(--red);
+    border: 10px solid #2b2b31; border-radius: 6px;
+    box-shadow: 0 0 0 4px #4b4b55, 0 30px 80px rgb(0 0 0 / .5), 0 0 120px rgb(255 199 44 / .18);
+    overflow: hidden;
+    container-type: inline-size;
+  }
+  .board::after { /* Scanlines / LED-Raster */
+    content: ""; position: absolute; inset: 0; pointer-events: none; z-index: 5;
+    background: repeating-linear-gradient(0deg, rgb(0 0 0 / .10) 0 2px, transparent 2px 4px);
+    mix-blend-mode: multiply;
+  }
+  .posts { z-index: 0; position: absolute; left: 0; right: 0; bottom: 18%; height: 30%; }
+  .posts::before, .posts::after {
+    content: ""; position: absolute; bottom: 0; top: 0; width: 14px; background: #2b2b31;
+  }
+  .posts::before { left: 22%; } .posts::after { right: 22%; }
+
+  .slide {
+    position: absolute; inset: 0;
+    display: grid; grid-template-columns: 1fr 1fr; align-items: center;
+    padding: 0 6cqw; gap: 3cqw;
+    opacity: 0;
+    animation: slide var(--loop) infinite;
+  }
+  .slide { animation-delay: var(--o, 0s); }
+  .slide:nth-of-type(2) { --o: calc(var(--loop) / 3); }
+  .slide:nth-of-type(3) { --o: calc(var(--loop) / 3 * 2); }
+  /* Jede Folie ist ein Drittel des Loops sichtbar; Ein-/Ausblendung per Clip */
+  @keyframes slide {
+    0%      { opacity: 0; clip-path: inset(0 100% 0 0); }
+    3%      { opacity: 1; }
+    8%, 30% { opacity: 1; clip-path: inset(0 0 0 0); }
+    33.3%   { opacity: 0; clip-path: inset(0 0 0 100%); }
+    100%    { opacity: 0; clip-path: inset(0 0 0 100%); }
+  }
+
+  .arch { width: 100%; max-height: 80%; justify-self: center; }
+  .arch path {
+    fill: none; stroke: var(--gold); stroke-width: 26; stroke-linecap: round; stroke-linejoin: round;
+    stroke-dasharray: 900; stroke-dashoffset: 900;
+    animation: draw var(--loop) infinite;
+  }
+  .slide .arch path { animation-delay: var(--o, 0s); }
+  @keyframes draw {
+    0%   { stroke-dashoffset: 900; }
+    12%  { stroke-dashoffset: 0; }
+    30%  { stroke-dashoffset: 0; }
+    33.3%, 100% { stroke-dashoffset: 900; }
+  }
+
+  .copy { color: #fff; }
+  .copy .kicker {
+    font-size: 2.4cqw; letter-spacing: .25em; text-transform: uppercase; color: var(--gold); font-weight: 700;
+  }
+  .copy .headline {
+    font-size: 8cqw; line-height: .95; font-weight: 900; letter-spacing: -.02em; margin-top: 1.2cqw;
+  }
+  .copy .sub { font-size: 2.6cqw; margin-top: 1.6cqw; opacity: .92; }
+  .copy > * { animation: rise var(--loop) var(--ease-out) infinite backwards; }
+  .slide .copy > * { animation-delay: calc(var(--o, 0s) + var(--d, 0s)); }
+  .copy .kicker { --d: .15s; } .copy .headline { --d: .3s; } .copy .sub { --d: .5s; }
+  @keyframes rise {
+    0%, 3%  { transform: translateY(1.5cqw); opacity: 0; }
+    10%, 30% { transform: none; opacity: 1; }
+    33.3%, 100% { transform: none; opacity: 0; }
+  }
+
+  /* Lichtstreifen */
+  .sweep {
+    position: absolute; inset: 0; z-index: 4; pointer-events: none;
+    background: linear-gradient(105deg, transparent 40%, rgb(255 255 255 / .22) 50%, transparent 60%);
+    transform: translateX(-100%);
+    animation: sweep 4s ease-in-out infinite;
+  }
+  @keyframes sweep { 0%, 55% { transform: translateX(-100%) } 100% { transform: translateX(100%) } }
+
+  .caption {
+    position: absolute; left: 50%; bottom: 3%; transform: translateX(-50%);
+    color: #ffffffb0; font-size: 12px; letter-spacing: .04em; text-align: center; padding: 0 16px;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { animation: none !important; }
+    .slide:first-of-type { opacity: 1; clip-path: none; }
+    .slide:first-of-type .arch path { stroke-dashoffset: 0; }
+    .slide:first-of-type .copy > * { opacity: 1; transform: none; }
+    .car { left: 30%; }
+  }
+</style>
+</head>
+<body>
+<div class="scene">
+  <div class="stars"></div>
+
+  <div class="board" role="img" aria-label="Animierte Werbetafel mit drei wechselnden Motiven">
+    <div class="slide">
+      <svg class="arch" viewBox="0 0 300 220" aria-hidden="true">
+        <path d="M30 200 V80 C30 10 105 10 150 90 C195 10 270 10 270 80 V200"/>
+      </svg>
+      <div class="copy">
+        <div class="kicker">Jetzt neu</div>
+        <div class="headline">Ich liebe<br>es.</div>
+        <div class="sub">Heiß. Frisch. Sofort.</div>
+      </div>
+    </div>
+
+    <div class="slide">
+      <svg class="arch" viewBox="0 0 300 220" aria-hidden="true">
+        <path d="M30 200 V80 C30 10 105 10 150 90 C195 10 270 10 270 80 V200"/>
+      </svg>
+      <div class="copy">
+        <div class="kicker">Nur heute</div>
+        <div class="headline">Zwei für<br>einen.</div>
+        <div class="sub">Im Drive-in, 24 Stunden.</div>
+      </div>
+    </div>
+
+    <div class="slide">
+      <svg class="arch" viewBox="0 0 300 220" aria-hidden="true">
+        <path d="M30 200 V80 C30 10 105 10 150 90 C195 10 270 10 270 80 V200"/>
+      </svg>
+      <div class="copy">
+        <div class="kicker">Nächste Ausfahrt</div>
+        <div class="headline">Noch<br>500 m.</div>
+        <div class="sub">Dein Hunger hat Vorfahrt.</div>
+      </div>
+    </div>
+
+    <div class="sweep"></div>
+  </div>
+
+  <div class="posts"></div>
+  <div class="road"></div>
+  <div class="car" aria-hidden="true"></div>
+  <div class="caption">Konzept-Animation, nicht offiziell. Marke und Motive sind Platzhalter.</div>
+</div>
+</body>
+</html>
