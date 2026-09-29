@@ -1,0 +1,52 @@
+<section class="section section--dark">
+  <div class="container">
+    <div class="section__head">
+      <h2 class="headline">{{ section.settings.heading | escape }}</h2>
+    </div>
+    <ul class="editorial">
+      {%- for block in section.blocks -%}
+        <li class="editorial__card" {{ block.shopify_attributes }}>
+          <a href="{{ block.settings.link | default: routes.root_url }}" class="editorial__link">
+            <div class="editorial__media" aria-hidden="true">
+              {%- if block.settings.image != blank -%}
+                {{ block.settings.image | image_url: width: 1200 | image_tag: loading: 'lazy', widths: '400, 700, 1000, 1200', sizes: '(min-width: 990px) 33vw, 100vw', class: 'editorial__img', alt: '' }}
+              {%- else -%}
+                {{ 'lifestyle-2' | placeholder_svg_tag: 'editorial__img placeholder' }}
+              {%- endif -%}
+            </div>
+            <p class="label editorial__kicker">{{ block.settings.kicker | escape }}</p>
+            <h3 class="editorial__title">{{ block.settings.title | escape }}</h3>
+          </a>
+        </li>
+      {%- endfor -%}
+    </ul>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Editorial",
+  "max_blocks": 3,
+  "settings": [
+    { "type": "text", "id": "heading", "label": "Überschrift", "default": "Stories" }
+  ],
+  "blocks": [
+    {
+      "type": "card",
+      "name": "Karte",
+      "settings": [
+        { "type": "image_picker", "id": "image", "label": "Bild" },
+        { "type": "text", "id": "kicker", "label": "Kicker", "default": "PLATZHALTER" },
+        { "type": "text", "id": "title", "label": "Titel", "default": "Titel der Story" },
+        { "type": "url", "id": "link", "label": "Link" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Editorial",
+      "blocks": [{ "type": "card" }, { "type": "card" }, { "type": "card" }]
+    }
+  ]
+}
+{% endschema %}

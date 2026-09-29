@@ -1,0 +1,61 @@
+{%- liquid
+  assign current_variant = product.selected_or_first_available_variant
+-%}
+<section class="section container product" data-product>
+  <div class="product__gallery">
+    {%- for media in product.media -%}
+      <div class="product__media" {% if media.media_type != 'image' %}data-non-image{% endif %}>
+        {%- if media.media_type == 'image' -%}
+          {{ media | image_url: width: 1600 | image_tag: loading: 'lazy', widths: '600, 900, 1200, 1600', sizes: '(min-width: 990px) 50vw, 100vw', alt: media.alt | default: product.title }}
+        {%- else -%}
+          {{ media | media_tag: image_size: '1600x' }}
+        {%- endif -%}
+      </div>
+    {%- else -%}
+      <div class="product__media">{{ 'product-1' | placeholder_svg_tag: 'placeholder' }}</div>
+    {%- endfor -%}
+  </div>
+
+  <div class="product__info">
+    {%- if product.vendor != blank -%}<p class="label">{{ product.vendor }}</p>{%- endif -%}
+    <h1 class="display-m">{{ product.title | escape }}</h1>
+    <div data-product-price>{% render 'price', product: product %}</div>
+    <p class="product__tax">{{ 'product.tax_note' | t }}</p>
+
+    {%- form 'product', product, id: 'ProductForm', class: 'product__form' -%}
+      <input type="hidden" name="id" value="{{ current_variant.id }}" data-variant-id>
+
+      {%- unless product.has_only_default_variant -%}
+        {%- for option in product.options_with_values -%}
+          <fieldset class="option" data-option-index="{{ forloop.index0 }}">
+            <legend class="label">{{ option.name | escape }}</legend>
+            <div class="option__values">
+              {%- for value in option.values -%}
+                {%- assign input_id = 'Option-' | append: forloop.parentloop.index0 | append: '-' | append: forloop.index0 -%}
+                <input class="option__input visually-hidden" type="radio" id="{{ input_id }}" name="option-{{ forloop.parentloop.index0 }}" value="{{ value | escape }}"{% if option.selected_value == value %} checked{% endif %}>
+                <label class="option__pill" for="{{ input_id }}">{{ value | escape }}</label>
+              {%- endfor -%}
+            </div>
+          </fieldset>
+        {%- endfor -%}
+      {%- endunless -%}
+
+      <script type="application/json" data-product-json>{{ product | json }}</script>
+
+      <button class="button button--full" type="submit" name="add" data-add-to-cart{% unless current_variant.available %} disabled{% endunless %}>
+        <span data-add-label>{% if current_variant.available %}{{ 'product.add_to_cart' | t }}{% else %}{{ 'product.sold_out' | t }}{% endif %}</span>
+      </button>
+    {%- endform -%}
+
+    {%- if product.description != blank -%}
+      <div class="rte product__description">{{ product.description }}</div>
+    {%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Produkt",
+  "settings": []
+}
+{% endschema %}

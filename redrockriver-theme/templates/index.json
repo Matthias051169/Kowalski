@@ -1,0 +1,53 @@
+{
+  "sections": {
+    "hero": {
+      "type": "hero",
+      "settings": {}
+    },
+    "new-footwear": {
+      "type": "featured-collection",
+      "settings": { "heading": "Neue Schuhe", "products_count": 8 }
+    },
+    "campaigns": {
+      "type": "campaign-tiles",
+      "blocks": {
+        "tile-1": { "type": "tile", "settings": { "heading": "Kampagne Eins" } },
+        "tile-2": { "type": "tile", "settings": { "heading": "Kampagne Zwei" } },
+        "tile-3": { "type": "tile", "settings": { "heading": "Kampagne Drei" } }
+      },
+      "block_order": ["tile-1", "tile-2", "tile-3"],
+      "settings": { "columns": "3" }
+    },
+    "new-apparel": {
+      "type": "featured-collection",
+      "settings": { "heading": "Neue Bekleidung", "products_count": 8 }
+    },
+    "categories": {
+      "type": "collection-list",
+      "blocks": {
+        "cat-1": { "type": "category", "settings": { "title": "Schuhe" } },
+        "cat-2": { "type": "category", "settings": { "title": "T-Shirts" } },
+        "cat-3": { "type": "category", "settings": { "title": "Hoodies" } },
+        "cat-4": { "type": "category", "settings": { "title": "Hosen" } },
+        "cat-5": { "type": "category", "settings": { "title": "Accessoires" } }
+      },
+      "block_order": ["cat-1", "cat-2", "cat-3", "cat-4", "cat-5"],
+      "settings": { "heading": "Kategorien" }
+    },
+    "editorial": {
+      "type": "editorial-cards",
+      "blocks": {
+        "card-1": { "type": "card", "settings": { "title": "Story Eins" } },
+        "card-2": { "type": "card", "settings": { "title": "Story Zwei" } },
+        "card-3": { "type": "card", "settings": { "title": "Story Drei" } }
+      },
+      "block_order": ["card-1", "card-2", "card-3"],
+      "settings": { "heading": "Stories" }
+    },
+    "newsletter": {
+      "type": "newsletter",
+      "settings": {}
+    }
+  },
+  "order": ["hero", "new-footwear", "campaigns", "new-apparel", "categories", "editorial", "newsletter"]
+}

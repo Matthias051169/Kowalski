@@ -1,0 +1,67 @@
+<section class="section container cart">
+  <h1 class="display-m">{{ 'cart.title' | t }}</h1>
+
+  {%- if cart.item_count == 0 -%}
+    <p class="empty">{{ 'cart.empty' | t }}</p>
+    <a class="button" href="{{ routes.all_products_collection_url }}">{{ 'cart.continue' | t }}</a>
+  {%- else -%}
+    <form action="{{ routes.cart_url }}" method="post" novalidate>
+      <table class="cart__table">
+        <thead>
+          <tr>
+            <th class="label" scope="col">{{ 'cart.product' | t }}</th>
+            <th class="label" scope="col">{{ 'cart.quantity' | t }}</th>
+            <th class="label cart__right" scope="col">{{ 'cart.total' | t }}</th>
+          </tr>
+        </thead>
+        <tbody>
+          {%- for item in cart.items -%}
+            <tr class="cart__item">
+              <td class="cart__product">
+                <a class="cart__image" href="{{ item.url }}">
+                  {%- if item.image -%}
+                    {{ item.image | image_url: width: 240 | image_tag: loading: 'lazy', widths: '120, 240', alt: item.image.alt | default: item.product.title }}
+                  {%- else -%}
+                    {{ 'product-1' | placeholder_svg_tag: 'placeholder' }}
+                  {%- endif -%}
+                </a>
+                <div>
+                  <a class="cart__title" href="{{ item.url }}">{{ item.product.title | escape }}</a>
+                  {%- unless item.product.has_only_default_variant -%}<p class="cart__variant">{{ item.variant.title | escape }}</p>{%- endunless -%}
+                  <p>{{ item.final_price | money }}</p>
+                  <a class="link label" href="{{ item.url_to_remove }}">{{ 'cart.remove' | t }}</a>
+                </div>
+              </td>
+              <td>
+                <label class="visually-hidden" for="Quantity-{{ item.index }}">{{ 'cart.quantity' | t }}</label>
+                <input class="field field--qty" type="number" id="Quantity-{{ item.index }}" name="updates[]" value="{{ item.quantity }}" min="0" inputmode="numeric">
+              </td>
+              <td class="cart__right">{{ item.final_line_price | money }}</td>
+            </tr>
+          {%- endfor -%}
+        </tbody>
+      </table>
+
+      <div class="cart__summary">
+        <label class="cart__note label" for="CartNote">{{ 'cart.note' | t }}
+          <textarea class="field" id="CartNote" name="note" rows="3">{{ cart.note }}</textarea>
+        </label>
+        <div class="cart__totals">
+          <p class="cart__subtotal"><span class="label">{{ 'cart.subtotal' | t }}</span> <strong>{{ cart.total_price | money }}</strong></p>
+          <p class="product__tax">{{ section.settings.tax_note }}</p>
+          <button class="button button--full button--outline" type="submit" name="update">{{ 'cart.update' | t }}</button>
+          <button class="button button--full" type="submit" name="checkout">{{ 'cart.checkout' | t }}</button>
+        </div>
+      </div>
+    </form>
+  {%- endif -%}
+</section>
+
+{% schema %}
+{
+  "name": "Warenkorb",
+  "settings": [
+    { "type": "text", "id": "tax_note", "label": "Hinweis zu Steuern und Versand (rechtlich prüfen)", "default": "Preise inkl. MwSt., zzgl. Versandkosten." }
+  ]
+}
+{% endschema %}

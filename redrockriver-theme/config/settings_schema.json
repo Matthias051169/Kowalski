@@ -1,0 +1,52 @@
+[
+  {
+    "name": "theme_info",
+    "theme_name": "Red Rock River",
+    "theme_version": "0.1.0",
+    "theme_author": "Red Rock River",
+    "theme_documentation_url": "https://redrockriver.com",
+    "theme_support_url": "https://redrockriver.com"
+  },
+  {
+    "name": "Farben",
+    "settings": [
+      { "type": "color", "id": "color_ink", "label": "Tinte (Text, dunkle Flächen)", "default": "#121110" },
+      { "type": "color", "id": "color_paper", "label": "Papier (Grundfläche)", "default": "#F4F1EC" },
+      { "type": "color", "id": "color_sand", "label": "Sand (Produktbildgrund)", "default": "#E8E2D8" },
+      { "type": "color", "id": "color_line", "label": "Linie", "default": "#D9D4CB" },
+      { "type": "color", "id": "color_stone", "label": "Stein (Sekundärtext)", "default": "#6B665F" },
+      { "type": "color", "id": "color_accent", "label": "Akzent Rotoxid", "default": "#C2371F" },
+      { "type": "color", "id": "color_accent_deep", "label": "Akzent dunkel (Sale)", "default": "#9E2A14" }
+    ]
+  },
+  {
+    "name": "Typografie",
+    "settings": [
+      { "type": "header", "content": "Schriften (Platzhalter, noch nicht endgültig gewählt)" },
+      { "type": "font_picker", "id": "type_heading_font", "label": "Überschriften", "default": "assistant_n7" },
+      { "type": "font_picker", "id": "type_body_font", "label": "Fließtext", "default": "assistant_n4" }
+    ]
+  },
+  {
+    "name": "Layout",
+    "settings": [
+      { "type": "range", "id": "page_width", "min": 1200, "max": 1920, "step": 40, "unit": "px", "label": "Maximale Seitenbreite", "default": 1600 }
+    ]
+  },
+  {
+    "name": "Logo",
+    "settings": [
+      { "type": "text", "id": "logo_text", "label": "Textschriftzug (Platzhalter)", "default": "Red Rock River" },
+      { "type": "image_picker", "id": "logo", "label": "Logo-Bild (optional, ersetzt den Textschriftzug)" }
+    ]
+  },
+  {
+    "name": "Soziale Medien",
+    "settings": [
+      { "type": "url", "id": "social_instagram", "label": "Instagram" },
+      { "type": "url", "id": "social_facebook", "label": "Facebook" },
+      { "type": "url", "id": "social_tiktok", "label": "TikTok" },
+      { "type": "url", "id": "social_youtube", "label": "YouTube" }
+    ]
+  }
+]

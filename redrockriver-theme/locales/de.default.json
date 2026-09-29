@@ -1,0 +1,86 @@
+{
+  "general": {
+    "skip_to_content": "Zum Inhalt springen",
+    "placeholder_note": "Platzhalter",
+    "search": "Suche",
+    "account": "Konto",
+    "cart": "Warenkorb",
+    "close": "Schließen",
+    "previous": "Zurück",
+    "next": "Weiter",
+    "shop_all": "Alle ansehen"
+  },
+  "header": {
+    "menu": "Menü",
+    "main_nav": "Hauptnavigation",
+    "cart_count": {
+      "one": "{{ count }} Artikel im Warenkorb",
+      "other": "{{ count }} Artikel im Warenkorb"
+    }
+  },
+  "footer": {
+    "newsletter_heading": "Newsletter",
+    "payment": "Zahlungsarten",
+    "rights": "Alle Rechte vorbehalten."
+  },
+  "newsletter": {
+    "email": "E-Mail-Adresse",
+    "submit": "Anmelden",
+    "consent": "Ich möchte den Newsletter erhalten und habe die Datenschutzerklärung gelesen.",
+    "success": "Danke, bitte bestätige deine Anmeldung per E-Mail."
+  },
+  "collection": {
+    "products_count": {
+      "one": "{{ count }} Produkt",
+      "other": "{{ count }} Produkte"
+    },
+    "sort_by": "Sortieren nach",
+    "filter": "Filtern",
+    "apply": "Anwenden",
+    "reset": "Zurücksetzen",
+    "price_from": "Preis ab",
+    "price_to": "Preis bis",
+    "empty": "In dieser Kollektion gibt es keine Produkte.",
+    "pagination": "Seitennavigation"
+  },
+  "product": {
+    "from": "ab",
+    "sale": "Sale",
+    "sold_out": "Ausverkauft",
+    "add_to_cart": "In den Warenkorb",
+    "unavailable": "Nicht verfügbar",
+    "quantity": "Menge",
+    "size_guide": "Größentabelle",
+    "tax_note": "Preise inkl. MwSt., zzgl. Versandkosten.",
+    "regular_price": "Regulärer Preis",
+    "sale_price": "Angebotspreis"
+  },
+  "cart": {
+    "title": "Warenkorb",
+    "empty": "Dein Warenkorb ist leer.",
+    "continue": "Weiter einkaufen",
+    "product": "Produkt",
+    "quantity": "Menge",
+    "total": "Summe",
+    "remove": "Entfernen",
+    "update": "Aktualisieren",
+    "subtotal": "Zwischensumme",
+    "checkout": "Zur Kasse",
+    "note": "Anmerkung zur Bestellung"
+  },
+  "search": {
+    "title": "Suche",
+    "placeholder": "Suchbegriff",
+    "submit": "Suchen",
+    "results": {
+      "one": "{{ count }} Ergebnis für „{{ terms }}“",
+      "other": "{{ count }} Ergebnisse für „{{ terms }}“"
+    },
+    "no_results": "Keine Ergebnisse für „{{ terms }}“."
+  },
+  "not_found": {
+    "title": "Seite nicht gefunden",
+    "text": "Diese Seite gibt es nicht (mehr).",
+    "cta": "Zur Startseite"
+  }
+}

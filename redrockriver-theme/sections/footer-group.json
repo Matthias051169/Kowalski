@@ -1,0 +1,16 @@
+{
+  "name": "Footer",
+  "type": "footer",
+  "sections": {
+    "footer": {
+      "type": "footer",
+      "blocks": {
+        "about": { "type": "text", "settings": { "heading": "Über uns", "text": "<p>PLATZHALTER: Kurzer Text über den Shop.</p>" } },
+        "help": { "type": "menu", "settings": { "heading": "Hilfe", "menu": "footer" } }
+      },
+      "block_order": ["about", "help"],
+      "settings": {}
+    }
+  },
+  "order": ["footer"]
+}

@@ -1,0 +1,23 @@
+<section class="section container">
+  <h1 class="display-m">{{ 'general.shop_all' | t }}</h1>
+  <ul class="cats">
+    {%- for collection in collections -%}
+      <li class="cat">
+        <a class="cat__link" href="{{ collection.url }}">
+          <div class="cat__media" aria-hidden="true">
+            {%- if collection.image != blank -%}
+              {{ collection.image | image_url: width: 800 | image_tag: loading: 'lazy', widths: '300, 500, 800', sizes: '(min-width: 990px) 20vw, 46vw', class: 'cat__img', alt: '' }}
+            {%- else -%}
+              {{ 'collection-1' | placeholder_svg_tag: 'cat__img placeholder' }}
+            {%- endif -%}
+          </div>
+          <span class="cat__title label">{{ collection.title | escape }}</span>
+        </a>
+      </li>
+    {%- endfor -%}
+  </ul>
+</section>
+
+{% schema %}
+{ "name": "Kollektionsliste", "settings": [] }
+{% endschema %}
