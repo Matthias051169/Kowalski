@@ -1,0 +1,41 @@
+<section class="section container">
+  <h1 class="display-m">{{ 'search.title' | t }}</h1>
+  <form class="search-form" action="{{ routes.search_url }}" method="get" role="search">
+    <label class="visually-hidden" for="SearchInput">{{ 'search.title' | t }}</label>
+    <input class="field" id="SearchInput" type="search" name="q" value="{{ search.terms | escape }}" placeholder="{{ 'search.placeholder' | t }}">
+    <input type="hidden" name="options[prefix]" value="last">
+    <button class="button" type="submit">{{ 'search.submit' | t }}</button>
+  </form>
+
+  {%- if search.performed -%}
+    {%- paginate search.results by 24 -%}
+      {%- if search.results_count > 0 -%}
+        <p class="label page-head__count">{{ 'search.results' | t: count: search.results_count, terms: search.terms }}</p>
+        <ul class="grid">
+          {%- for item in search.results -%}
+            <li>
+              {%- if item.object_type == 'product' -%}
+                {% render 'product-card', product: item, sizes: '(min-width: 990px) 25vw, 46vw' %}
+              {%- else -%}
+                <a class="link" href="{{ item.url }}">{{ item.title | escape }}</a>
+              {%- endif -%}
+            </li>
+          {%- endfor -%}
+        </ul>
+        {%- if paginate.pages > 1 -%}
+          <nav class="pagination" aria-label="{{ 'collection.pagination' | t }}">
+            {%- if paginate.previous -%}<a class="button button--small" href="{{ paginate.previous.url }}">{{ 'general.previous' | t }}</a>{%- endif -%}
+            <span class="label">{{ paginate.current_page }} / {{ paginate.pages }}</span>
+            {%- if paginate.next -%}<a class="button button--small" href="{{ paginate.next.url }}">{{ 'general.next' | t }}</a>{%- endif -%}
+          </nav>
+        {%- endif -%}
+      {%- else -%}
+        <p class="empty">{{ 'search.no_results' | t: terms: search.terms }}</p>
+      {%- endif -%}
+    {%- endpaginate -%}
+  {%- endif -%}
+</section>
+
+{% schema %}
+{ "name": "Suche", "settings": [] }
+{% endschema %}

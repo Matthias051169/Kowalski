@@ -1,0 +1,84 @@
+<footer class="site-footer">
+  <div class="container site-footer__grid">
+    {%- for block in section.blocks -%}
+      <div class="site-footer__col" {{ block.shopify_attributes }}>
+        {%- if block.settings.heading != blank -%}
+          <h2 class="site-footer__heading label">{{ block.settings.heading | escape }}</h2>
+        {%- endif -%}
+        {%- if block.type == 'menu' -%}
+          <ul class="site-footer__links">
+            {%- for link in block.settings.menu.links -%}
+              <li><a href="{{ link.url }}">{{ link.title }}</a></li>
+            {%- endfor -%}
+          </ul>
+        {%- elsif block.type == 'text' -%}
+          <div class="rte">{{ block.settings.text }}</div>
+        {%- endif -%}
+      </div>
+    {%- endfor -%}
+  </div>
+
+  <div class="container site-footer__bottom">
+    <ul class="site-footer__social">
+      {%- assign networks = 'instagram,facebook,tiktok,youtube' | split: ',' -%}
+      {%- for network in networks -%}
+        {%- assign key = 'social_' | append: network -%}
+        {%- if settings[key] != blank -%}
+          <li><a href="{{ settings[key] }}" rel="noopener" target="_blank">{{ network | capitalize }}</a></li>
+        {%- endif -%}
+      {%- endfor -%}
+    </ul>
+
+    {%- if section.settings.show_payment_icons and shop.enabled_payment_types.size > 0 -%}
+      <ul class="site-footer__payment" aria-label="{{ 'footer.payment' | t }}">
+        {%- for type in shop.enabled_payment_types -%}
+          <li>{{ type | payment_type_svg_tag: class: 'icon--payment' }}</li>
+        {%- endfor -%}
+      </ul>
+    {%- endif -%}
+
+    <p class="site-footer__copy">&copy; {{ 'now' | date: '%Y' }} {{ shop.name }}. {{ 'footer.rights' | t }}</p>
+
+    {%- if section.settings.legal_menu != blank -%}
+      <ul class="site-footer__legal">
+        {%- for link in section.settings.legal_menu.links -%}
+          <li><a href="{{ link.url }}">{{ link.title }}</a></li>
+        {%- endfor -%}
+      </ul>
+    {%- endif -%}
+  </div>
+</footer>
+
+{% schema %}
+{
+  "name": "Footer",
+  "settings": [
+    { "type": "checkbox", "id": "show_payment_icons", "label": "Zahlungsarten anzeigen", "default": true },
+    { "type": "link_list", "id": "legal_menu", "label": "Rechtliche Links (Impressum, AGB, Widerruf, Datenschutz)" }
+  ],
+  "blocks": [
+    {
+      "type": "menu",
+      "name": "Linkliste",
+      "settings": [
+        { "type": "text", "id": "heading", "label": "Überschrift", "default": "Hilfe" },
+        { "type": "link_list", "id": "menu", "label": "Menü", "default": "footer" }
+      ]
+    },
+    {
+      "type": "text",
+      "name": "Text",
+      "settings": [
+        { "type": "text", "id": "heading", "label": "Überschrift", "default": "Über uns" },
+        { "type": "richtext", "id": "text", "label": "Text", "default": "<p>PLATZHALTER: Kurzer Text über den Shop.</p>" }
+      ]
+    }
+  ],
+  "default": {
+    "blocks": [
+      { "type": "text" },
+      { "type": "menu" }
+    ]
+  }
+}
+{% endschema %}

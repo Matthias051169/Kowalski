@@ -1,0 +1,47 @@
+<!doctype html>
+<html class="no-js" lang="{{ request.locale.iso_code }}">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="robots" content="noindex">
+    <title>{{ 'gift_card.title' | t }} &ndash; {{ shop.name }}</title>
+    {{ content_for_header }}
+    <style>
+      {{ settings.type_heading_font | font_face: font_display: 'swap' }}
+      {{ settings.type_body_font | font_face: font_display: 'swap' }}
+      :root {
+        --color-ink: {{ settings.color_ink }};
+        --color-paper: {{ settings.color_paper }};
+        --color-sand: {{ settings.color_sand }};
+        --color-line: {{ settings.color_line }};
+        --color-stone: {{ settings.color_stone }};
+        --color-accent: {{ settings.color_accent }};
+        --color-accent-deep: {{ settings.color_accent_deep }};
+        --font-heading: {{ settings.type_heading_font.family }}, {{ settings.type_heading_font.fallback_families }};
+        --font-heading-weight: {{ settings.type_heading_font.weight }};
+        --font-body: {{ settings.type_body_font.family }}, {{ settings.type_body_font.fallback_families }};
+        --font-body-weight: {{ settings.type_body_font.weight }};
+        --page-width: {{ settings.page_width }}px;
+      }
+    </style>
+    {{ 'theme.css' | asset_url | stylesheet_tag }}
+  </head>
+  <body class="template-gift-card">
+    <main class="gift-card container">
+      <p class="logo-text">{{ settings.logo_text | default: shop.name }}</p>
+      <h1 class="display-m">{{ 'gift_card.title' | t }}</h1>
+      <p class="label">{{ 'gift_card.balance' | t }}</p>
+      <p class="display gift-card__balance">{{ gift_card.balance | money }}</p>
+      {%- if gift_card.expired -%}
+        <p class="form-status form-status--error">{{ gift_card.expires_on | date: '%d.%m.%Y' }}</p>
+      {%- endif -%}
+      <p class="label">{{ 'gift_card.code' | t }}</p>
+      <p class="gift-card__code">{{ gift_card.code | format_code }}</p>
+      <p class="gift-card__actions">
+        <a class="button" href="{{ shop.url }}">{{ 'gift_card.use' | t }}</a>
+        <button class="button button--outline" type="button" onclick="window.print()">{{ 'gift_card.print' | t }}</button>
+        {%- if gift_card.pass_url -%}<a class="button button--outline" href="{{ gift_card.pass_url }}">{{ 'gift_card.wallet' | t }}</a>{%- endif -%}
+      </p>
+    </main>
+  </body>
+</html>

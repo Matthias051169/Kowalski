@@ -1,0 +1,39 @@
+<section class="section container auth">
+  <div class="auth__box">
+    <h1 class="display-m">{{ 'customer.login.title' | t }}</h1>
+
+    {%- form 'customer_login', novalidate: 'novalidate', class: 'auth__form' -%}
+      {%- if form.errors -%}
+        <div class="form-status form-status--error" role="alert">{{ form.errors | default_errors }}</div>
+      {%- endif -%}
+      <label class="label" for="CustomerEmail">{{ 'customer.login.email' | t }}</label>
+      <input class="field" type="email" id="CustomerEmail" name="customer[email]" autocomplete="email" autocapitalize="off" required>
+      <label class="label" for="CustomerPassword">{{ 'customer.login.password' | t }}</label>
+      <input class="field" type="password" id="CustomerPassword" name="customer[password]" autocomplete="current-password" required>
+      <button class="button button--full" type="submit">{{ 'customer.login.submit' | t }}</button>
+    {%- endform -%}
+
+    <div class="auth__recover">
+      <h2 class="headline">{{ 'customer.login.recover_title' | t }}</h2>
+      {%- form 'recover_customer_password', class: 'auth__form' -%}
+        {%- if form.posted_successfully? -%}
+          <p class="form-status" role="status">{{ 'customer.login.recover_success' | t }}</p>
+        {%- else -%}
+          {%- if form.errors -%}
+            <div class="form-status form-status--error" role="alert">{{ form.errors | default_errors }}</div>
+          {%- endif -%}
+          <p>{{ 'customer.login.recover_text' | t }}</p>
+          <label class="visually-hidden" for="RecoverEmail">{{ 'customer.login.email' | t }}</label>
+          <input class="field" type="email" id="RecoverEmail" name="email" autocomplete="email" placeholder="{{ 'customer.login.email' | t }}" required>
+          <button class="button button--outline button--full" type="submit">{{ 'customer.login.recover_submit' | t }}</button>
+        {%- endif -%}
+      {%- endform -%}
+    </div>
+
+    <p><a class="link label" href="{{ routes.account_register_url }}">{{ 'customer.login.create' | t }}</a></p>
+  </div>
+</section>
+
+{% schema %}
+{ "name": "Anmelden", "settings": [] }
+{% endschema %}

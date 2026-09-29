@@ -1,0 +1,256 @@
+{
+  "general": {
+    "skip_to_content": "Zum Inhalt springen",
+    "placeholder_note": "Platzhalter",
+    "search": "Suche",
+    "account": "Konto",
+    "cart": "Warenkorb",
+    "close": "Schließen",
+    "previous": "Zurück",
+    "next": "Weiter",
+    "shop_all": "Alle ansehen",
+    "wishlist": "Wunschliste",
+    "open_search": "Suche öffnen",
+    "quantity_minus": "Menge verringern",
+    "quantity_plus": "Menge erhöhen",
+    "read_more": "Weiterlesen",
+    "loading": "Lädt …"
+  },
+  "header": {
+    "menu": "Menü",
+    "main_nav": "Hauptnavigation",
+    "cart_count": {
+      "one": "{{ count }} Artikel im Warenkorb",
+      "other": "{{ count }} Artikel im Warenkorb"
+    },
+    "search_placeholder": "Wonach suchst du?"
+  },
+  "footer": {
+    "newsletter_heading": "Newsletter",
+    "payment": "Zahlungsarten",
+    "rights": "Alle Rechte vorbehalten."
+  },
+  "newsletter": {
+    "email": "E-Mail-Adresse",
+    "submit": "Anmelden",
+    "consent": "Ich möchte den Newsletter erhalten und habe die Datenschutzerklärung gelesen.",
+    "success": "Danke, bitte bestätige deine Anmeldung per E-Mail."
+  },
+  "collection": {
+    "products_count": {
+      "one": "{{ count }} Produkt",
+      "other": "{{ count }} Produkte"
+    },
+    "sort_by": "Sortieren nach",
+    "filter": "Filtern",
+    "apply": "Anwenden",
+    "reset": "Zurücksetzen",
+    "price_from": "Preis ab",
+    "price_to": "Preis bis",
+    "empty": "In dieser Kollektion gibt es keine Produkte.",
+    "pagination": "Seitennavigation"
+  },
+  "product": {
+    "from": "ab",
+    "sale": "Sale",
+    "sold_out": "Ausverkauft",
+    "add_to_cart": "In den Warenkorb",
+    "unavailable": "Nicht verfügbar",
+    "quantity": "Menge",
+    "size_guide": "Größentabelle",
+    "tax_note": "Preise inkl. MwSt., zzgl. Versandkosten.",
+    "regular_price": "Regulärer Preis",
+    "sale_price": "Angebotspreis"
+  },
+  "cart": {
+    "title": "Warenkorb",
+    "empty": "Dein Warenkorb ist leer.",
+    "continue": "Weiter einkaufen",
+    "product": "Produkt",
+    "quantity": "Menge",
+    "total": "Summe",
+    "remove": "Entfernen",
+    "update": "Aktualisieren",
+    "subtotal": "Zwischensumme",
+    "checkout": "Zur Kasse",
+    "note": "Anmerkung zur Bestellung",
+    "drawer_view_cart": "Warenkorb ansehen",
+    "added": "Zum Warenkorb hinzugefügt",
+    "error": "Der Artikel konnte nicht hinzugefügt werden.",
+    "items": {
+      "one": "{{ count }} Artikel",
+      "other": "{{ count }} Artikel"
+    }
+  },
+  "search": {
+    "title": "Suche",
+    "placeholder": "Suchbegriff",
+    "submit": "Suchen",
+    "results": {
+      "one": "{{ count }} Ergebnis für „{{ terms }}“",
+      "other": "{{ count }} Ergebnisse für „{{ terms }}“"
+    },
+    "no_results": "Keine Ergebnisse für „{{ terms }}“."
+  },
+  "not_found": {
+    "title": "Seite nicht gefunden",
+    "text": "Diese Seite gibt es nicht (mehr).",
+    "cta": "Zur Startseite"
+  },
+  "wishlist": {
+    "title": "Wunschliste",
+    "add": "Zur Wunschliste hinzufügen",
+    "remove": "Von der Wunschliste entfernen",
+    "empty": "Deine Wunschliste ist leer.",
+    "note": "Die Wunschliste wird nur in diesem Browser gespeichert.",
+    "count": {
+      "one": "{{ count }} Artikel auf der Wunschliste",
+      "other": "{{ count }} Artikel auf der Wunschliste"
+    }
+  },
+  "predictive": {
+    "products": "Produkte",
+    "collections": "Kollektionen",
+    "suggestions": "Vorschläge",
+    "all_results": "Alle Ergebnisse anzeigen",
+    "no_results": "Keine Vorschläge gefunden."
+  },
+  "customer": {
+    "account": {
+      "title": "Mein Konto",
+      "welcome": "Hallo, {{ name }}",
+      "orders": "Bestellungen",
+      "no_orders": "Du hast noch keine Bestellungen aufgegeben.",
+      "order": "Bestellung",
+      "date": "Datum",
+      "payment": "Zahlung",
+      "fulfillment": "Versand",
+      "total": "Summe",
+      "details": "Kontodaten",
+      "addresses": "Adressen verwalten",
+      "logout": "Abmelden",
+      "default_address": "Standardadresse",
+      "no_address": "Noch keine Adresse hinterlegt."
+    },
+    "login": {
+      "title": "Anmelden",
+      "email": "E-Mail-Adresse",
+      "password": "Passwort",
+      "submit": "Anmelden",
+      "forgot": "Passwort vergessen?",
+      "create": "Konto erstellen",
+      "recover_title": "Passwort zurücksetzen",
+      "recover_text": "Wir senden dir einen Link zum Zurücksetzen per E-Mail.",
+      "recover_submit": "Link senden",
+      "recover_success": "Wir haben dir eine E-Mail mit einem Link zum Zurücksetzen geschickt.",
+      "back": "Zurück zur Anmeldung"
+    },
+    "register": {
+      "title": "Konto erstellen",
+      "first_name": "Vorname",
+      "last_name": "Nachname",
+      "email": "E-Mail-Adresse",
+      "password": "Passwort",
+      "submit": "Konto erstellen",
+      "have_account": "Du hast schon ein Konto? Anmelden"
+    },
+    "reset": {
+      "title": "Neues Passwort festlegen",
+      "password": "Neues Passwort",
+      "confirm": "Passwort bestätigen",
+      "submit": "Passwort speichern"
+    },
+    "activate": {
+      "title": "Konto aktivieren",
+      "text": "Lege ein Passwort fest, um dein Konto zu aktivieren.",
+      "password": "Passwort",
+      "confirm": "Passwort bestätigen",
+      "submit": "Konto aktivieren",
+      "decline": "Einladung ablehnen"
+    },
+    "order": {
+      "title": "Bestellung {{ name }}",
+      "placed": "Aufgegeben am {{ date }}",
+      "cancelled": "Storniert am {{ date }}",
+      "product": "Produkt",
+      "sku": "Artikelnr.",
+      "price": "Preis",
+      "quantity": "Menge",
+      "total": "Summe",
+      "subtotal": "Zwischensumme",
+      "shipping": "Versand",
+      "tax": "Steuern",
+      "order_total": "Gesamtsumme",
+      "billing": "Rechnungsadresse",
+      "shipping_address": "Lieferadresse",
+      "payment_status": "Zahlungsstatus",
+      "fulfillment_status": "Versandstatus",
+      "back": "Zurück zum Konto"
+    },
+    "addresses": {
+      "title": "Adressen",
+      "add": "Neue Adresse hinzufügen",
+      "edit": "Adresse bearbeiten",
+      "save": "Adresse speichern",
+      "cancel": "Abbrechen",
+      "delete": "Löschen",
+      "confirm_delete": "Diese Adresse wirklich löschen?",
+      "default": "Standardadresse",
+      "set_default": "Als Standardadresse festlegen",
+      "first_name": "Vorname",
+      "last_name": "Nachname",
+      "company": "Firma",
+      "address1": "Straße und Hausnummer",
+      "address2": "Adresszusatz",
+      "zip": "Postleitzahl",
+      "city": "Ort",
+      "country": "Land",
+      "province": "Bundesland / Region",
+      "phone": "Telefon",
+      "back": "Zurück zum Konto",
+      "empty": "Es sind noch keine Adressen gespeichert."
+    }
+  },
+  "password": {
+    "title": "Bald verfügbar",
+    "enter": "Mit Passwort eintreten",
+    "password": "Passwort",
+    "submit": "Eintreten",
+    "owner": "Du bist der Shop-Betreiber?",
+    "login": "Hier anmelden"
+  },
+  "gift_card": {
+    "title": "Geschenkkarte",
+    "balance": "Restguthaben",
+    "code": "Gutscheincode",
+    "use": "Im Shop einlösen",
+    "print": "Drucken",
+    "wallet": "Zum Wallet hinzufügen"
+  },
+  "blog": {
+    "title": "Stories",
+    "empty": "Noch keine Beiträge.",
+    "by": "von {{ author }}",
+    "back": "Zurück zu den Stories",
+    "published": "Veröffentlicht am {{ date }}"
+  },
+  "contact": {
+    "title": "Kontakt",
+    "name": "Name",
+    "email": "E-Mail-Adresse",
+    "phone": "Telefon (optional)",
+    "message": "Nachricht",
+    "submit": "Senden",
+    "success": "Danke für deine Nachricht. Wir melden uns bald bei dir."
+  },
+  "stores": {
+    "hours": "Öffnungszeiten",
+    "directions": "Route anzeigen"
+  },
+  "look": {
+    "products": "Im Look enthalten"
+  },
+  "video": {
+    "fallback": "Video"
+  }
+}

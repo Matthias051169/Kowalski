@@ -1,0 +1,21 @@
+<section class="section container auth">
+  <div class="auth__box">
+    <h1 class="display-m">{{ 'customer.activate.title' | t }}</h1>
+    <p>{{ 'customer.activate.text' | t }}</p>
+    {%- form 'activate_customer_password', class: 'auth__form' -%}
+      {%- if form.errors -%}
+        <div class="form-status form-status--error" role="alert">{{ form.errors | default_errors }}</div>
+      {%- endif -%}
+      <label class="label" for="ActivatePassword">{{ 'customer.activate.password' | t }}</label>
+      <input class="field" type="password" id="ActivatePassword" name="customer[password]" autocomplete="new-password" required>
+      <label class="label" for="ActivatePasswordConfirm">{{ 'customer.activate.confirm' | t }}</label>
+      <input class="field" type="password" id="ActivatePasswordConfirm" name="customer[password_confirmation]" autocomplete="new-password" required>
+      <button class="button button--full" type="submit" name="action" value="activate">{{ 'customer.activate.submit' | t }}</button>
+      <button class="button button--outline button--full" type="submit" name="action" value="decline">{{ 'customer.activate.decline' | t }}</button>
+    {%- endform -%}
+  </div>
+</section>
+
+{% schema %}
+{ "name": "Konto aktivieren", "settings": [] }
+{% endschema %}

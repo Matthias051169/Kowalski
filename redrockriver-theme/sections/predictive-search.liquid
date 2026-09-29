@@ -1,0 +1,55 @@
+{%- if predictive_search.performed -%}
+  {%- liquid
+    assign products = predictive_search.resources.products
+    assign collections = predictive_search.resources.collections
+    assign queries = predictive_search.resources.queries
+  -%}
+  <div class="predictive">
+    {%- if products.size == 0 and collections.size == 0 and queries.size == 0 -%}
+      <p class="empty">{{ 'predictive.no_results' | t }}</p>
+    {%- endif -%}
+
+    {%- if queries.size > 0 -%}
+      <h2 class="label">{{ 'predictive.suggestions' | t }}</h2>
+      <ul class="predictive__queries">
+        {%- for query in queries -%}
+          <li><a class="link" href="{{ query.url }}">{{ query.styled_text }}</a></li>
+        {%- endfor -%}
+      </ul>
+    {%- endif -%}
+
+    {%- if products.size > 0 -%}
+      <h2 class="label">{{ 'predictive.products' | t }}</h2>
+      <ul class="predictive__products">
+        {%- for product in products -%}
+          <li>
+            <a class="predictive__item" href="{{ product.url }}">
+              <span class="predictive__thumb">
+                {%- if product.featured_image -%}
+                  {{ product.featured_image | image_url: width: 160 | image_tag: loading: 'lazy', widths: '80, 160', alt: '' }}
+                {%- endif -%}
+              </span>
+              <span class="predictive__name">{{ product.title | escape }}</span>
+              <span class="predictive__price">{{ product.price | money }}</span>
+            </a>
+          </li>
+        {%- endfor -%}
+      </ul>
+    {%- endif -%}
+
+    {%- if collections.size > 0 -%}
+      <h2 class="label">{{ 'predictive.collections' | t }}</h2>
+      <ul class="predictive__queries">
+        {%- for collection in collections -%}
+          <li><a class="link" href="{{ collection.url }}">{{ collection.title | escape }}</a></li>
+        {%- endfor -%}
+      </ul>
+    {%- endif -%}
+
+    <p><a class="button button--small" href="{{ routes.search_url }}?q={{ predictive_search.terms | url_encode }}&amp;options%5Bprefix%5D=last">{{ 'predictive.all_results' | t }}</a></p>
+  </div>
+{%- endif -%}
+
+{% schema %}
+{ "name": "Suchvorschläge", "settings": [] }
+{% endschema %}

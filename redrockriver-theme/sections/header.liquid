@@ -1,0 +1,106 @@
+<header class="site-header">
+  <div class="site-header__bar container">
+    <button class="icon-btn site-header__toggle" type="button" aria-expanded="false" aria-controls="MobileNav" data-menu-toggle>
+      {% render 'icon', name: 'menu' %}
+      <span class="visually-hidden">{{ 'header.menu' | t }}</span>
+    </button>
+
+    <a class="site-header__logo" href="{{ routes.root_url }}">
+      {%- if settings.logo != blank -%}
+        {{ settings.logo | image_url: width: 400 | image_tag: alt: shop.name, class: 'site-header__logo-img', loading: 'eager' }}
+      {%- else -%}
+        <span class="logo-text">{{ settings.logo_text | default: shop.name }}</span>
+      {%- endif -%}
+    </a>
+
+    <nav class="site-nav" aria-label="{{ 'header.main_nav' | t }}">
+      <ul class="site-nav__list">
+        {%- for link in section.settings.menu.links -%}
+          <li class="site-nav__item{% if link.links.size > 0 %} has-children{% endif %}">
+            <a class="site-nav__link label" href="{{ link.url }}"{% if link.current %} aria-current="page"{% endif %}>{{ link.title }}</a>
+            {%- if link.links.size > 0 -%}
+              <div class="mega">
+                <ul class="mega__list container">
+                  {%- for child in link.links -%}
+                    <li><a href="{{ child.url }}">{{ child.title }}</a></li>
+                  {%- endfor -%}
+                </ul>
+              </div>
+            {%- endif -%}
+          </li>
+        {%- endfor -%}
+      </ul>
+    </nav>
+
+    <div class="site-header__actions">
+      <a class="icon-btn" href="{{ routes.search_url }}" data-search-open>
+        {% render 'icon', name: 'search' %}
+        <span class="visually-hidden">{{ 'general.search' | t }}</span>
+      </a>
+      {%- if section.settings.show_wishlist -%}
+        <a class="icon-btn site-header__wishlist" href="{{ pages['wunschliste'].url | default: '/pages/wunschliste' }}">
+          {% render 'icon', name: 'heart' %}
+          <span class="visually-hidden">{{ 'general.wishlist' | t }}</span>
+          <span class="cart-count" data-wishlist-count hidden aria-hidden="true"></span>
+        </a>
+      {%- endif -%}
+      <a class="icon-btn site-header__account" href="{{ routes.account_url }}">
+        {% render 'icon', name: 'user' %}
+        <span class="visually-hidden">{{ 'general.account' | t }}</span>
+      </a>
+      <a class="icon-btn site-header__cart" href="{{ routes.cart_url }}" data-cart-open>
+        {% render 'icon', name: 'bag' %}
+        <span class="visually-hidden">{{ 'general.cart' | t }}, {{ 'header.cart_count' | t: count: cart.item_count }}</span>
+        <span class="cart-count" data-cart-count aria-hidden="true"{% if cart.item_count == 0 %} hidden{% endif %}>{{ cart.item_count }}</span>
+      </a>
+    </div>
+  </div>
+
+  <nav class="mobile-nav" id="MobileNav" aria-label="{{ 'header.main_nav' | t }}" hidden>
+    <ul class="mobile-nav__list">
+      {%- for link in section.settings.menu.links -%}
+        <li>
+          {%- if link.links.size > 0 -%}
+            <details>
+              <summary class="label">{{ link.title }} {% render 'icon', name: 'chevron' %}</summary>
+              <ul>
+                <li><a href="{{ link.url }}">{{ 'general.shop_all' | t }}</a></li>
+                {%- for child in link.links -%}
+                  <li><a href="{{ child.url }}">{{ child.title }}</a></li>
+                {%- endfor -%}
+              </ul>
+            </details>
+          {%- else -%}
+            <a class="label" href="{{ link.url }}">{{ link.title }}</a>
+          {%- endif -%}
+        </li>
+      {%- endfor -%}
+    </ul>
+  </nav>
+
+  <div class="search-overlay" id="SearchOverlay" role="dialog" aria-modal="true" aria-label="{{ 'search.title' | t }}" hidden>
+    <div class="search-overlay__inner container">
+      <form class="search-form" action="{{ routes.search_url }}" method="get" role="search">
+        <label class="visually-hidden" for="PredictiveInput">{{ 'search.title' | t }}</label>
+        <input class="field" type="search" id="PredictiveInput" name="q" autocomplete="off" placeholder="{{ 'header.search_placeholder' | t }}" data-predictive-input>
+        <input type="hidden" name="options[prefix]" value="last">
+        <button class="button" type="submit">{{ 'search.submit' | t }}</button>
+        <button class="icon-btn" type="button" data-search-close>
+          {% render 'icon', name: 'close' %}
+          <span class="visually-hidden">{{ 'general.close' | t }}</span>
+        </button>
+      </form>
+      <div data-predictive-results aria-live="polite"></div>
+    </div>
+  </div>
+</header>
+
+{% schema %}
+{
+  "name": "Header",
+  "settings": [
+    { "type": "link_list", "id": "menu", "label": "Hauptmenü", "default": "main-menu" },
+    { "type": "checkbox", "id": "show_wishlist", "label": "Wunschliste anzeigen (Seite mit Template page.wishlist und Handle wunschliste anlegen)", "default": true }
+  ]
+}
+{% endschema %}

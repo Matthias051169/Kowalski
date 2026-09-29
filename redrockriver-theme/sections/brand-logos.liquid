@@ -1,0 +1,50 @@
+<section class="section container brands">
+  {%- if section.settings.heading != blank -%}
+    <h2 class="label brands__heading">{{ section.settings.heading | escape }}</h2>
+  {%- endif -%}
+  <ul class="brands__list">
+    {%- for block in section.blocks -%}
+      <li class="brands__item" {{ block.shopify_attributes }}>
+        {%- capture brand_inner -%}
+          {%- if block.settings.logo != blank -%}
+            {{ block.settings.logo | image_url: width: 400 | image_tag: loading: 'lazy', widths: '200, 400', class: 'brands__img', alt: block.settings.name }}
+          {%- else -%}
+            <span class="brands__name display-s">{{ block.settings.name | escape }}</span>
+          {%- endif -%}
+        {%- endcapture -%}
+        {%- if block.settings.link != blank -%}
+          <a href="{{ block.settings.link }}" class="brands__link">{{ brand_inner }}</a>
+        {%- else -%}
+          {{ brand_inner }}
+        {%- endif -%}
+      </li>
+    {%- endfor -%}
+  </ul>
+</section>
+
+{% schema %}
+{
+  "name": "Markenleiste",
+  "max_blocks": 12,
+  "settings": [
+    { "type": "text", "id": "heading", "label": "Überschrift", "default": "Marken" }
+  ],
+  "blocks": [
+    {
+      "type": "brand",
+      "name": "Marke",
+      "settings": [
+        { "type": "text", "id": "name", "label": "Name / Alternativtext", "default": "Marke" },
+        { "type": "image_picker", "id": "logo", "label": "Logo (nur wenn du die Rechte hast)" },
+        { "type": "url", "id": "link", "label": "Link" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Markenleiste",
+      "blocks": [{ "type": "brand" }, { "type": "brand" }, { "type": "brand" }, { "type": "brand" }, { "type": "brand" }, { "type": "brand" }]
+    }
+  ]
+}
+{% endschema %}
