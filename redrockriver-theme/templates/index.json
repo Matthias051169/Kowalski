@@ -6,48 +6,266 @@
     },
     "new-footwear": {
       "type": "featured-collection",
-      "settings": { "heading": "Neue Schuhe", "products_count": 8 }
+      "settings": {
+        "heading": "Neue Schuhe",
+        "products_count": 8
+      }
     },
     "campaigns": {
       "type": "campaign-tiles",
       "blocks": {
-        "tile-1": { "type": "tile", "settings": { "heading": "Kampagne Eins" } },
-        "tile-2": { "type": "tile", "settings": { "heading": "Kampagne Zwei" } },
-        "tile-3": { "type": "tile", "settings": { "heading": "Kampagne Drei" } }
+        "tile-1": {
+          "type": "tile",
+          "settings": {
+            "heading": "Kampagne Eins"
+          }
+        },
+        "tile-2": {
+          "type": "tile",
+          "settings": {
+            "heading": "Kampagne Zwei"
+          }
+        },
+        "tile-3": {
+          "type": "tile",
+          "settings": {
+            "heading": "Kampagne Drei"
+          }
+        }
       },
-      "block_order": ["tile-1", "tile-2", "tile-3"],
-      "settings": { "columns": "3" }
+      "block_order": [
+        "tile-1",
+        "tile-2",
+        "tile-3"
+      ],
+      "settings": {
+        "columns": "3"
+      }
     },
     "new-apparel": {
       "type": "featured-collection",
-      "settings": { "heading": "Neue Bekleidung", "products_count": 8 }
+      "settings": {
+        "heading": "Neue Bekleidung",
+        "products_count": 8
+      }
     },
     "categories": {
       "type": "collection-list",
       "blocks": {
-        "cat-1": { "type": "category", "settings": { "title": "Schuhe" } },
-        "cat-2": { "type": "category", "settings": { "title": "T-Shirts" } },
-        "cat-3": { "type": "category", "settings": { "title": "Hoodies" } },
-        "cat-4": { "type": "category", "settings": { "title": "Hosen" } },
-        "cat-5": { "type": "category", "settings": { "title": "Accessoires" } }
+        "cat-1": {
+          "type": "category",
+          "settings": {
+            "title": "Schuhe"
+          }
+        },
+        "cat-2": {
+          "type": "category",
+          "settings": {
+            "title": "T-Shirts"
+          }
+        },
+        "cat-3": {
+          "type": "category",
+          "settings": {
+            "title": "Hoodies"
+          }
+        },
+        "cat-4": {
+          "type": "category",
+          "settings": {
+            "title": "Hosen"
+          }
+        },
+        "cat-5": {
+          "type": "category",
+          "settings": {
+            "title": "Accessoires"
+          }
+        }
       },
-      "block_order": ["cat-1", "cat-2", "cat-3", "cat-4", "cat-5"],
-      "settings": { "heading": "Kategorien" }
+      "block_order": [
+        "cat-1",
+        "cat-2",
+        "cat-3",
+        "cat-4",
+        "cat-5"
+      ],
+      "settings": {
+        "heading": "Kategorien"
+      }
     },
     "editorial": {
       "type": "editorial-cards",
       "blocks": {
-        "card-1": { "type": "card", "settings": { "title": "Story Eins" } },
-        "card-2": { "type": "card", "settings": { "title": "Story Zwei" } },
-        "card-3": { "type": "card", "settings": { "title": "Story Drei" } }
+        "card-1": {
+          "type": "card",
+          "settings": {
+            "title": "Story Eins"
+          }
+        },
+        "card-2": {
+          "type": "card",
+          "settings": {
+            "title": "Story Zwei"
+          }
+        },
+        "card-3": {
+          "type": "card",
+          "settings": {
+            "title": "Story Drei"
+          }
+        }
       },
-      "block_order": ["card-1", "card-2", "card-3"],
-      "settings": { "heading": "Stories" }
+      "block_order": [
+        "card-1",
+        "card-2",
+        "card-3"
+      ],
+      "settings": {
+        "heading": "Stories"
+      }
     },
     "newsletter": {
       "type": "newsletter",
       "settings": {}
+    },
+    "look": {
+      "type": "shop-the-look",
+      "blocks": {
+        "look-1": {
+          "type": "look",
+          "settings": {
+            "title": "Look Eins"
+          }
+        },
+        "look-2": {
+          "type": "look",
+          "settings": {
+            "title": "Look Zwei"
+          }
+        },
+        "look-3": {
+          "type": "look",
+          "settings": {
+            "title": "Look Drei"
+          }
+        },
+        "look-4": {
+          "type": "look",
+          "settings": {
+            "title": "Look Vier"
+          }
+        }
+      },
+      "block_order": [
+        "look-1",
+        "look-2",
+        "look-3",
+        "look-4"
+      ],
+      "settings": {
+        "heading": "Shop the Look"
+      }
+    },
+    "brands": {
+      "type": "brand-logos",
+      "blocks": {
+        "brand-1": {
+          "type": "brand",
+          "settings": {
+            "name": "Marke 1"
+          }
+        },
+        "brand-2": {
+          "type": "brand",
+          "settings": {
+            "name": "Marke 2"
+          }
+        },
+        "brand-3": {
+          "type": "brand",
+          "settings": {
+            "name": "Marke 3"
+          }
+        },
+        "brand-4": {
+          "type": "brand",
+          "settings": {
+            "name": "Marke 4"
+          }
+        },
+        "brand-5": {
+          "type": "brand",
+          "settings": {
+            "name": "Marke 5"
+          }
+        },
+        "brand-6": {
+          "type": "brand",
+          "settings": {
+            "name": "Marke 6"
+          }
+        }
+      },
+      "block_order": [
+        "brand-1",
+        "brand-2",
+        "brand-3",
+        "brand-4",
+        "brand-5",
+        "brand-6"
+      ],
+      "settings": {
+        "heading": "Marken"
+      }
+    },
+    "showcase": {
+      "type": "brand-showcase",
+      "settings": {}
+    },
+    "stores": {
+      "type": "store-locations",
+      "blocks": {
+        "store-1": {
+          "type": "store",
+          "settings": {
+            "name": "Store Stadt Eins"
+          }
+        },
+        "store-2": {
+          "type": "store",
+          "settings": {
+            "name": "Store Stadt Zwei"
+          }
+        },
+        "store-3": {
+          "type": "store",
+          "settings": {
+            "name": "Store Stadt Drei"
+          }
+        }
+      },
+      "block_order": [
+        "store-1",
+        "store-2",
+        "store-3"
+      ],
+      "settings": {
+        "heading": "Unsere Stores"
+      }
     }
   },
-  "order": ["hero", "new-footwear", "campaigns", "new-apparel", "categories", "editorial", "newsletter"]
+  "order": [
+    "hero",
+    "new-footwear",
+    "campaigns",
+    "look",
+    "new-apparel",
+    "brands",
+    "categories",
+    "showcase",
+    "editorial",
+    "stores",
+    "newsletter"
+  ]
 }

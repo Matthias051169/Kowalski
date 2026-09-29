@@ -33,18 +33,25 @@
     </nav>
 
     <div class="site-header__actions">
-      <a class="icon-btn" href="{{ routes.search_url }}">
+      <a class="icon-btn" href="{{ routes.search_url }}" data-search-open>
         {% render 'icon', name: 'search' %}
         <span class="visually-hidden">{{ 'general.search' | t }}</span>
       </a>
+      {%- if section.settings.show_wishlist -%}
+        <a class="icon-btn site-header__wishlist" href="{{ pages['wunschliste'].url | default: '/pages/wunschliste' }}">
+          {% render 'icon', name: 'heart' %}
+          <span class="visually-hidden">{{ 'general.wishlist' | t }}</span>
+          <span class="cart-count" data-wishlist-count hidden aria-hidden="true"></span>
+        </a>
+      {%- endif -%}
       <a class="icon-btn site-header__account" href="{{ routes.account_url }}">
         {% render 'icon', name: 'user' %}
         <span class="visually-hidden">{{ 'general.account' | t }}</span>
       </a>
-      <a class="icon-btn site-header__cart" href="{{ routes.cart_url }}">
+      <a class="icon-btn site-header__cart" href="{{ routes.cart_url }}" data-cart-open>
         {% render 'icon', name: 'bag' %}
         <span class="visually-hidden">{{ 'general.cart' | t }}, {{ 'header.cart_count' | t: count: cart.item_count }}</span>
-        {%- if cart.item_count > 0 -%}<span class="cart-count" aria-hidden="true">{{ cart.item_count }}</span>{%- endif -%}
+        <span class="cart-count" data-cart-count aria-hidden="true"{% if cart.item_count == 0 %} hidden{% endif %}>{{ cart.item_count }}</span>
       </a>
     </div>
   </div>
@@ -70,13 +77,30 @@
       {%- endfor -%}
     </ul>
   </nav>
+
+  <div class="search-overlay" id="SearchOverlay" role="dialog" aria-modal="true" aria-label="{{ 'search.title' | t }}" hidden>
+    <div class="search-overlay__inner container">
+      <form class="search-form" action="{{ routes.search_url }}" method="get" role="search">
+        <label class="visually-hidden" for="PredictiveInput">{{ 'search.title' | t }}</label>
+        <input class="field" type="search" id="PredictiveInput" name="q" autocomplete="off" placeholder="{{ 'header.search_placeholder' | t }}" data-predictive-input>
+        <input type="hidden" name="options[prefix]" value="last">
+        <button class="button" type="submit">{{ 'search.submit' | t }}</button>
+        <button class="icon-btn" type="button" data-search-close>
+          {% render 'icon', name: 'close' %}
+          <span class="visually-hidden">{{ 'general.close' | t }}</span>
+        </button>
+      </form>
+      <div data-predictive-results aria-live="polite"></div>
+    </div>
+  </div>
 </header>
 
 {% schema %}
 {
   "name": "Header",
   "settings": [
-    { "type": "link_list", "id": "menu", "label": "Hauptmenü", "default": "main-menu" }
+    { "type": "link_list", "id": "menu", "label": "Hauptmenü", "default": "main-menu" },
+    { "type": "checkbox", "id": "show_wishlist", "label": "Wunschliste anzeigen (Seite mit Template page.wishlist und Handle wunschliste anlegen)", "default": true }
   ]
 }
 {% endschema %}

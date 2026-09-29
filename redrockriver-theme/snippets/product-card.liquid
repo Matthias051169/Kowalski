@@ -3,6 +3,7 @@
 {%- endcomment -%}
 <article class="product-card">
   {%- if product != blank -%}
+    <div class="product-card__wrap">
     <a class="product-card__media" href="{{ product.url }}" aria-hidden="true" tabindex="-1">
       {%- if product.featured_media -%}
         {{ product.featured_media | image_url: width: 900 | image_tag: loading: 'lazy', widths: '300, 450, 600, 900', sizes: sizes, class: 'product-card__img', alt: product.title }}
@@ -18,6 +19,10 @@
         <span class="badge">{{ 'product.sold_out' | t }}</span>
       {%- endif -%}
     </a>
+    <button class="wishlist-btn" type="button" data-wishlist-toggle data-handle="{{ product.handle }}" aria-pressed="false" data-label-add="{{ 'wishlist.add' | t }}" data-label-remove="{{ 'wishlist.remove' | t }}" aria-label="{{ 'wishlist.add' | t }}">
+      {% render 'icon', name: 'heart' %}
+    </button>
+    </div>
     <div class="product-card__body">
       {%- if product.vendor != blank -%}<p class="product-card__vendor label">{{ product.vendor }}</p>{%- endif -%}
       <h3 class="product-card__title"><a href="{{ product.url }}">{{ product.title }}</a></h3>

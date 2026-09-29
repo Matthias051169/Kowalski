@@ -1,0 +1,51 @@
+{%- assign collection = section.settings.collection -%}
+<section class="section container showcase">
+  <div class="showcase__grid">
+    <div class="showcase__media">
+      {%- if section.settings.video != blank -%}
+        {{ section.settings.video | video_tag: image_size: '1600x', controls: true, loop: false, muted: false, preload: 'none', class: 'showcase__video' }}
+      {%- elsif section.settings.image != blank -%}
+        {{ section.settings.image | image_url: width: 1600 | image_tag: loading: 'lazy', widths: '600, 900, 1200, 1600', sizes: '(min-width: 990px) 50vw, 100vw', class: 'showcase__img', alt: '' }}
+      {%- else -%}
+        {{ 'lifestyle-1' | placeholder_svg_tag: 'showcase__img placeholder' }}
+      {%- endif -%}
+    </div>
+    <div class="showcase__text">
+      <p class="label">{{ section.settings.kicker | escape }}</p>
+      <h2 class="display-m">{{ section.settings.heading | escape }}</h2>
+      <p>{{ section.settings.text | escape }}</p>
+      {%- if section.settings.button_label != blank -%}
+        <a class="button" href="{{ section.settings.button_link | default: collection.url | default: routes.all_products_collection_url }}">{{ section.settings.button_label | escape }}</a>
+      {%- endif -%}
+    </div>
+  </div>
+
+  <ul class="grid showcase__products">
+    {%- if collection != blank and collection.products.size > 0 -%}
+      {%- for product in collection.products limit: 4 -%}
+        <li>{% render 'product-card', product: product, sizes: '(min-width: 990px) 25vw, 46vw' %}</li>
+      {%- endfor -%}
+    {%- else -%}
+      {%- for i in (1..4) -%}
+        <li>{% render 'product-card', placeholder_index: i %}</li>
+      {%- endfor -%}
+    {%- endif -%}
+  </ul>
+</section>
+
+{% schema %}
+{
+  "name": "Eigenmarke mit Video",
+  "settings": [
+    { "type": "video", "id": "video", "label": "Video (hochgeladen bei Shopify)" },
+    { "type": "image_picker", "id": "image", "label": "Bild (falls kein Video)" },
+    { "type": "text", "id": "kicker", "label": "Kicker", "default": "PLATZHALTER" },
+    { "type": "text", "id": "heading", "label": "Überschrift", "default": "Unsere Eigenmarke" },
+    { "type": "textarea", "id": "text", "label": "Text", "default": "Platzhaltertext. Hier steht später die Geschichte der Eigenmarke." },
+    { "type": "text", "id": "button_label", "label": "Button-Text", "default": "Kollektion ansehen" },
+    { "type": "url", "id": "button_link", "label": "Button-Link" },
+    { "type": "collection", "id": "collection", "label": "Kollektion (4 Produkte)" }
+  ],
+  "presets": [{ "name": "Eigenmarke mit Video" }]
+}
+{% endschema %}

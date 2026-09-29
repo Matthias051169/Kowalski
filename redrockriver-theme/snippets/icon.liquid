@@ -1,5 +1,5 @@
 {%- comment -%}
-  Icon-Snippet. Parameter: name (menu, search, user, bag, close, arrow-left, arrow-right, chevron)
+  Icon-Snippet. Parameter: name (menu, search, user, bag, close, arrow-left, arrow-right, chevron, heart)
 {%- endcomment -%}
 <svg class="icon icon--{{ name }}" viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="square" aria-hidden="true" focusable="false">
   {%- case name -%}
@@ -19,5 +19,7 @@
       <path d="M9 5l7 7-7 7"/>
     {%- when 'chevron' -%}
       <path d="M6 9l6 6 6-6"/>
+    {%- when 'heart' -%}
+      <path d="M12 20s-7.5-4.6-7.5-10A4.5 4.5 0 0112 7.2 4.5 4.5 0 0119.5 10c0 5.4-7.5 10-7.5 10z"/>
   {%- endcase -%}
 </svg>

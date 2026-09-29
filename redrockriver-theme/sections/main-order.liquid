@@ -1,0 +1,65 @@
+<section class="section container account">
+  <header class="account__head">
+    <div>
+      <p class="label"><a class="link" href="{{ routes.account_url }}">{{ 'customer.order.back' | t }}</a></p>
+      <h1 class="display-m">{{ 'customer.order.title' | t: name: order.name }}</h1>
+      <p>{{ 'customer.order.placed' | t: date: order.created_at | date: '%d.%m.%Y' }}</p>
+      {%- if order.cancelled -%}
+        <p class="form-status form-status--error">{{ 'customer.order.cancelled' | t: date: order.cancelled_at | date: '%d.%m.%Y' }}</p>
+      {%- endif -%}
+    </div>
+  </header>
+
+  <table class="cart__table">
+    <thead>
+      <tr>
+        <th class="label" scope="col">{{ 'customer.order.product' | t }}</th>
+        <th class="label" scope="col">{{ 'customer.order.price' | t }}</th>
+        <th class="label" scope="col">{{ 'customer.order.quantity' | t }}</th>
+        <th class="label cart__right" scope="col">{{ 'customer.order.total' | t }}</th>
+      </tr>
+    </thead>
+    <tbody>
+      {%- for line_item in order.line_items -%}
+        <tr class="cart__item">
+          <td>
+            {%- if line_item.url != blank -%}<a class="cart__title" href="{{ line_item.url }}">{{ line_item.title | escape }}</a>{%- else -%}<span class="cart__title">{{ line_item.title | escape }}</span>{%- endif -%}
+            {%- if line_item.sku != blank -%}<p class="cart__variant">{{ 'customer.order.sku' | t }}: {{ line_item.sku }}</p>{%- endif -%}
+          </td>
+          <td>{{ line_item.final_price | money }}</td>
+          <td>{{ line_item.quantity }}</td>
+          <td class="cart__right">{{ line_item.final_line_price | money }}</td>
+        </tr>
+      {%- endfor -%}
+    </tbody>
+  </table>
+
+  <div class="account__grid">
+    <div class="account__addresses">
+      <div>
+        <h2 class="label">{{ 'customer.order.billing' | t }}</h2>
+        {{ order.billing_address | format_address }}
+        <p>{{ 'customer.order.payment_status' | t }}: {{ order.financial_status_label }}</p>
+      </div>
+      <div>
+        <h2 class="label">{{ 'customer.order.shipping_address' | t }}</h2>
+        {{ order.shipping_address | format_address }}
+        <p>{{ 'customer.order.fulfillment_status' | t }}: {{ order.fulfillment_status_label }}</p>
+      </div>
+    </div>
+    <div class="cart__totals">
+      <p class="cart__subtotal"><span class="label">{{ 'customer.order.subtotal' | t }}</span> <span>{{ order.line_items_subtotal_price | money }}</span></p>
+      {%- for shipping_method in order.shipping_methods -%}
+        <p class="cart__subtotal"><span class="label">{{ 'customer.order.shipping' | t }} ({{ shipping_method.title }})</span> <span>{{ shipping_method.price | money }}</span></p>
+      {%- endfor -%}
+      {%- for tax_line in order.tax_lines -%}
+        <p class="cart__subtotal"><span class="label">{{ 'customer.order.tax' | t }} ({{ tax_line.title }})</span> <span>{{ tax_line.price | money }}</span></p>
+      {%- endfor -%}
+      <p class="cart__subtotal"><span class="label">{{ 'customer.order.order_total' | t }}</span> <strong>{{ order.total_price | money }}</strong></p>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{ "name": "Bestellung", "settings": [] }
+{% endschema %}

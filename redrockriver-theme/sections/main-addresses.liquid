@@ -1,0 +1,51 @@
+<section class="section container account">
+  <header class="account__head">
+    <div>
+      <p class="label"><a class="link" href="{{ routes.account_url }}">{{ 'customer.addresses.back' | t }}</a></p>
+      <h1 class="display-m">{{ 'customer.addresses.title' | t }}</h1>
+    </div>
+  </header>
+
+  {%- paginate customer.addresses by 5 -%}
+    {%- if customer.addresses.size == 0 -%}
+      <p class="empty">{{ 'customer.addresses.empty' | t }}</p>
+    {%- endif -%}
+
+    <ul class="addresses">
+      {%- for address in customer.addresses -%}
+        <li class="address-card">
+          {%- if address == customer.default_address -%}<p class="label">{{ 'customer.addresses.default' | t }}</p>{%- endif -%}
+          {{ address | format_address }}
+          <details class="address-card__edit">
+            <summary class="link label">{{ 'customer.addresses.edit' | t }}</summary>
+            {%- form 'customer_address', address, class: 'auth__form' -%}
+              {% render 'address-fields', address: address, prefix: forloop.index %}
+              <label class="checkbox"><input type="checkbox" name="address[default]" value="1"{% if address == customer.default_address %} checked{% endif %}><span>{{ 'customer.addresses.set_default' | t }}</span></label>
+              <button class="button button--small" type="submit">{{ 'customer.addresses.save' | t }}</button>
+            {%- endform -%}
+          </details>
+          <button class="link label address-card__delete" type="button" data-address-delete="{{ address.url }}" data-confirm="{{ 'customer.addresses.confirm_delete' | t }}">{{ 'customer.addresses.delete' | t }}</button>
+        </li>
+      {%- endfor -%}
+    </ul>
+
+    {%- if paginate.pages > 1 -%}
+      <nav class="pagination" aria-label="{{ 'collection.pagination' | t }}">
+        {%- if paginate.previous -%}<a class="button button--small" href="{{ paginate.previous.url }}">{{ 'general.previous' | t }}</a>{%- endif -%}
+        <span class="label">{{ paginate.current_page }} / {{ paginate.pages }}</span>
+        {%- if paginate.next -%}<a class="button button--small" href="{{ paginate.next.url }}">{{ 'general.next' | t }}</a>{%- endif -%}
+      </nav>
+    {%- endif -%}
+  {%- endpaginate -%}
+
+  <h2 class="headline account__sub">{{ 'customer.addresses.add' | t }}</h2>
+  {%- form 'customer_address', customer.new_address, class: 'auth__form auth__form--wide' -%}
+    {% render 'address-fields', address: customer.new_address, prefix: 'new' %}
+    <label class="checkbox"><input type="checkbox" name="address[default]" value="1"><span>{{ 'customer.addresses.set_default' | t }}</span></label>
+    <button class="button" type="submit">{{ 'customer.addresses.save' | t }}</button>
+  {%- endform -%}
+</section>
+
+{% schema %}
+{ "name": "Adressen", "settings": [] }
+{% endschema %}
